@@ -31,14 +31,13 @@ with DAG(
         image="gcr.io/looker-private-demo/thelook_ecommerce:1.0",
         env_vars={
             "NUM_OF_USERS": "100",
-            "TARGET_GCS_BUCKET": "us-central1-thelook-faker-d1ecf43a-bucket",
-            "EXTRANEOUS_HEADERS": '["event_type", "ip_address", "browser", "traffic_source", "session_id", "sequence_number", "uri", "is_sold"]'
-        },
+            "TARGET_GCS_BUCKET": "us-central1-thelook-ecom-b96f375a-bucket",
+            "EXTRANEOUS_HEADERS": '["event_type", "ip_address", "browser", "traffic_source", "session_id", "sequence_number", "uri", "is_sold"]'        },
         # resources={"request_memory": "4G", "request_cpu": "1"},
     )
     products_gcs_to_bq = gcs_to_bq.GoogleCloudStorageToBigQueryOperator(
         task_id="load_products_to_bq",
-        bucket="us-central1-thelook-faker-d1ecf43a-bucket",
+        bucket="us-central1-thelook-ecom-b96f375a-bucket",
         source_objects=["data/products.csv"],
         source_format="CSV",
         ignore_unknown_values=True,
@@ -59,7 +58,7 @@ with DAG(
     )
     events_gcs_to_bq = gcs_to_bq.GoogleCloudStorageToBigQueryOperator(
         task_id="load_events_to_bq",
-        bucket="us-central1-thelook-faker-d1ecf43a-bucket",
+        bucket="us-central1-thelook-ecom-b96f375a-bucket",
         source_objects=["data/events.csv"],
         source_format="CSV",
         ignore_unknown_values=True,
@@ -84,7 +83,7 @@ with DAG(
     )
     inventory_items_gcs_to_bq = gcs_to_bq.GoogleCloudStorageToBigQueryOperator(
         task_id="load_inventory_items_to_bq",
-        bucket="us-central1-thelook-faker-d1ecf43a-bucket",
+        bucket="us-central1-thelook-ecom-b96f375a-bucket",
         source_objects=["data/inventory_items.csv"],
         source_format="CSV",
         ignore_unknown_values=True,
@@ -108,7 +107,7 @@ with DAG(
     )
     order_items_gcs_to_bq = gcs_to_bq.GoogleCloudStorageToBigQueryOperator(
         task_id="load_order_items_to_bq",
-        bucket="us-central1-thelook-faker-d1ecf43a-bucket",
+        bucket="us-central1-thelook-ecom-b96f375a-bucket",
         source_objects=["data/order_items.csv"],
         source_format="CSV",
         ignore_unknown_values=True,
@@ -129,7 +128,7 @@ with DAG(
     )
     orders_gcs_to_bq = gcs_to_bq.GoogleCloudStorageToBigQueryOperator(
         task_id="load_orders_to_bq",
-        bucket="us-central1-thelook-faker-d1ecf43a-bucket",
+        bucket="us-central1-thelook-ecom-b96f375a-bucket",
         source_objects=["data/orders.csv"],
         source_format="CSV",
         ignore_unknown_values=True,
@@ -150,7 +149,7 @@ with DAG(
     )
     users_gcs_to_bq = gcs_to_bq.GoogleCloudStorageToBigQueryOperator(
         task_id="load_users_to_bq",
-        bucket="us-central1-thelook-faker-d1ecf43a-bucket",
+        bucket="us-central1-thelook-ecom-b96f375a-bucket",
         source_objects=["data/users.csv"],
         source_format="CSV",
         ignore_unknown_values=True,
@@ -176,7 +175,7 @@ with DAG(
     )
     distribution_centers_gcs_to_bq = gcs_to_bq.GoogleCloudStorageToBigQueryOperator(
         task_id="load_distribution_centers_to_bq",
-        bucket="us-central1-thelook-faker-d1ecf43a-bucket",
+        bucket="us-central1-thelook-ecom-b96f375a-bucket",
         source_objects=["data/distribution_centers.csv"],
         source_format="CSV",
         ignore_unknown_values=True,
